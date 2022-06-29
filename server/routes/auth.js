@@ -17,14 +17,14 @@ route.post('/register',verifyGCaptcha,async (req,res)=>{
     await checkUnique({email:req.body.email, username:req.body.username});
     const otp = stringGen(6);
 
-    await sendNodeMail(req.body.email,req.body.name,"OTP for Email verification",otpEmailTemplate(req.body.name,otp))
+    // await sendNodeMail(req.body.email,req.body.name,"OTP for Email verification",otpEmailTemplate(req.body.name,otp))
 
     const user = new User({
         name:req.body.name,
         email:req.body.email,
         password:await bCryptEncrypt(req.body.password),
         username:req.body.username,
-        otp:base64Enc(otp)
+        otp:base64Enc("123456")
     })
 
     const savedUser = await user.save();
@@ -48,8 +48,8 @@ route.post('/login',verifyGCaptcha,verifyCookies, async (req,res)=>{
 
     const {jwt_token,newLocation,location,uip,time,user} = await createJWT(req,filterNull({username:req.body.username,email:req.body.email}),req.body.password);
 
-    if(newLocation)
-        await sendNodeMail(user.email,user.name,"New login location",newLocationDetectedTemplate(user.name,uip,location,time));
+    // if(newLocation)
+    //     await sendNodeMail(user.email,user.name,"New login location",newLocationDetectedTemplate(user.name,uip,location,time));
 
     return sendMessage(res,null,null,{"Authorization":`Bearer ${jwt_token}`})
 
@@ -89,9 +89,9 @@ route.post('/sendEmail',async (req,res)=>{
     
     const otp = stringGen(6);
 
-    const user = await resendEmail(filterNull({username:req.body.username,email:req.body.email}),otp)
+    const user = await resendEmail(filterNull({username:req.body.username,email:req.body.email}),"123456")
 
-    await sendNodeMail(user.email,user.name,"OTP for Email verification",otpEmailTemplate(user.name,otp))
+    // await sendNodeMail(user.email,user.name,"OTP for Email verification",otpEmailTemplate(user.name,otp))
 
     return sendMessage(res,"Email sent Successfully!")
 
@@ -116,7 +116,7 @@ route.post('/forgotPassword',async (req,res)=>{
 
     await sendNodeMail(user.email,user.name,"Reset Password",resetPasswordTemplate(url))
 
-    return sendMessage(res,"Email send successfully")
+    return sendMessage(res,url)
 
     }catch(err){
     

@@ -3,8 +3,15 @@ import {Route,Routes, BrowserRouter as Router} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css';
 
-const LoginForm = lazy(()=>import("./routes/loginPage/loginPage"))
-const PortfolioForm = lazy(()=>import("./routes/portfolioForm/portfolioForm"))
+// import { Home } from "./pages/Home"
+import { Store } from "./routes/ecomerse/Store"
+import { About } from "./routes/ecomerse/About"
+import {Navbar} from "./components/Navbar"
+import {Carousel} from "./components/Carousel"
+import { ShoppingCartProvider } from "./context/ShoppingCartContext"
+
+import LoginForm from "./routes/loginPage/loginPage"
+// const PortfolioForm = lazy(()=>import("./routes/portfolioForm/portfolioForm"))
 
 
 function App() {
@@ -46,15 +53,20 @@ function App() {
   },[]);
 
   return (
-    
+    <ShoppingCartProvider>
     <Router>
       <Routes>
       <Route path="/" element={<LoginForm userIp={userIp}/>}/>
       <Route path="/reset-password/:token" element={<LoginForm forgotPass={true} check={true} userIp={userIp}/>}/>
       {/* <Route path="/signup" element={<LoginForm check={true}/>}/> */}
-      <Route path="/portfolio" element={<PortfolioForm />} />
+      {/* <Route path="/portfolio" element={<PortfolioForm />} /> */}
+      
+        <Route path="/ecommerce" element ={<><Navbar/><Carousel/><Store/></>}/>
+        <Route path="/about" element ={<><Navbar/><About/></>}/>        
+      
       </Routes>
     </Router>
+    </ShoppingCartProvider>
   );
 }
 

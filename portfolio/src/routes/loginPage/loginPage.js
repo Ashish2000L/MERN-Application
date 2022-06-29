@@ -89,6 +89,14 @@ const LoginForm = ({check=false,forgotPass=false,userIp=null})=>{
 		setforgetPass2(null);
 	}, [checkbox,forgotPassword]);
 
+	if(localStorage.getItem("AuthToken"))
+	{
+		
+			navigate("/ecommerce")
+
+		return;
+	}
+
 	const loginOnSubmit = async (e)=>{
 		e.preventDefault();
 
@@ -187,12 +195,14 @@ const LoginForm = ({check=false,forgotPass=false,userIp=null})=>{
 						}
 
 						localStorage.setItem("AuthToken",auth);
-						
-						return toast.success("Loggedin Successfully!", {position:toast.POSITION.TOP_RIGHT,
-							autoClose:5000,
-							toastId:cryptojs.enc.Base64.stringify(cryptojs.enc.Utf8.parse(data.statusCode)),
-							theme:"dark",
-							pauseOnFocusLoss:false})
+
+						navigate("/ecommerce");
+						return ;
+						// return toast.success("Loggedin Successfully!", {position:toast.POSITION.TOP_RIGHT,
+						// 	autoClose:5000,
+						// 	toastId:cryptojs.enc.Base64.stringify(cryptojs.enc.Utf8.parse(data.statusCode)),
+						// 	theme:"dark",
+						// 	pauseOnFocusLoss:false})
 					}
 				}
 			).catch(error => {

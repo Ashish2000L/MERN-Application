@@ -1,0 +1,50 @@
+[
+    {
+      "id": 1,
+      "name": "Green Mango",
+      "price": 40,
+      "imgUrl": "/images/green-mango.avif"
+    },
+    {
+      "id": 2,
+      "name": "Kesar Mango",
+      "price": 65,
+      "imgUrl": "/images/kesar-mango.avif"
+    },
+    {
+      "id": 3,
+      "name": "Tender Coconut",
+      "price": 70,
+      "imgUrl": "/images/tender-coconut.avif"
+    },
+    {
+      "id": 4,
+      "name": "Watermelon",
+      "price": 90,
+      "imgUrl": "/images/watermelon.avif"
+    },
+    {
+      "id": 5,
+      "name": "Apple",
+      "price": 40,
+      "imgUrl": "/images/apple.avif"
+    },
+    {
+      "id": 6,
+      "name": "Orange",
+      "price": 65,
+      "imgUrl": "/images/orange.avif"
+    },
+    {
+      "id": 7,
+      "name": "Dragon Fruit",
+      "price": 70,
+      "imgUrl": "/images/dragon-fruit.avif"
+    },
+    {
+      "id": 8,
+      "name": "Green Apple",
+      "price": 90,
+      "imgUrl": "/images/green-apple.avif"
+    }
+  ]
